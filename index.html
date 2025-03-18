@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .tab-container {
+        display: flex;
+        gap: 10px;
+        }
+        .tab-button {
+        padding: 10px 15px;
+        cursor: pointer;
+        border: 1px solid #ccc;
+        background-color: #f0f0f0;
+        }
+        .tab-button.active {
+        background-color: #e0e0e0;
+        font-weight: bold;
+        }
+        .tab-content {
+        display: none;
+        margin-top: 10px;
+        padding: 15px;
+        border: 1px solid #ccc;
+        }
+        .tab-content.active {
+        display: block;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="tab-container">
+        <button class="tab-button active" data-tab="tab1">Onglet 1</button>
+        <button class="tab-button" data-tab="tab2">Onglet 2</button>
+        <button class="tab-button" data-tab="tab3">Onglet 3</button>
+    </div>
+
+    <div class="tab-content active" id="tab1">Contenu de l'onglet 1</div>
+    <div class="tab-content" id="tab2">Contenu de l'onglet 2</div>
+    <div class="tab-content" id="tab3">Contenu de l'onglet 3</div>
+    
+    <script>
+        document.querySelectorAll('.tab-button').forEach(button => {
+            button.addEventListener('click', () => {
+                // Supprimer l'état actif des boutons
+                document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+
+                // Ajouter l'état actif au bouton cliqué
+                button.classList.add('active');
+
+                // Cacher tout le contenu des onglets
+                document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+
+                // Afficher le contenu lié au bouton
+                const tabId = button.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
